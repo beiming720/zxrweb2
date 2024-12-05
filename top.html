@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" class="html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>投票榜</title>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      /* 设置默认字体大小 */
+      html {
+        font-size: 16px; /* 默认大小 */
+        height: 100%;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh; /* 让背景图覆盖整个视口高度 */
+      }
+
+      .container {
+        height: 100vh; /* 让背景图覆盖整个视口高度 */
+        width: 100%;
+        overflow-y: auto; /* 添加竖向滚动条 */
+      }
+      .bg {
+        background: url(./images/bg1.jpg);
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        display: flex;
+      }
+      .nt-box-left {
+        flex: 1;
+        height: 100%;
+      }
+      .nt-box-right {
+        flex: 1;
+        height: 100%;
+      }
+
+      .go {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1rem;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        background-color: rgb(196, 196, 196);
+        padding: 10px 20px;
+        border-radius: 10px;
+      }
+      .hp {
+        position: absolute;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 10px solid rgb(104, 84, 76);
+        z-index: 99;
+        right: 10px;
+        top: 126px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      }
+      .ljtp {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1rem;
+        text-align: center;
+        cursor: pointer;
+        background-color: #fff;
+        width: 165px; /* 椭圆的宽度 */
+        height: 55px; /* 椭圆的高度 */
+        padding-left: 15px;
+        border-radius: 50%; /* 设置为50%，使元素变成椭圆 */
+        border: 10px solid rgb(1, 0, 1);
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-size: 26px;
+        font-weight: bold;
+      }
+      .ph-box {
+        display: flex;
+        flex-direction: column;
+      }
+      .ph1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .ph1 img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+      }
+      .ph1 span {
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        font-size: 30px;
+      }
+      .ph1 .jg1 {
+        margin-left: 25%;
+      }
+      .ph1 .jg2 {
+        margin-right: 25%;
+      }
+      /* 弹窗背景层 */
+      .modal {
+        display: none; /* 默认隐藏 */
+        position: fixed; /* 固定定位 */
+        z-index: 999; /* 放在所有其他内容之上 */
+        left: 0;
+        top: 0;
+        width: 100%; /* 宽度占满整个屏幕 */
+        height: 100%; /* 高度占满整个屏幕 */
+        overflow: auto; /* 如果内容超出屏幕，则允许滚动 */
+        background-color: rgba(0, 0, 0, 0.4); /* 半透明黑色背景 */
+      }
+
+      /* 弹窗内容 */
+      .modal-content {
+        background-color: rgba(255, 255, 255, 0.6); /* 白色透明背景 */
+        margin: 15% auto; /* 上下居中 */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* 内容宽度 */
+        max-width: 500px; /* 最大宽度限制 */
+        border-radius: 10px;
+      }
+      .modal-content1 {
+        background-color: rgba(255, 255, 255, 0.6); /* 白色透明背景 */
+        margin: 60% auto; /* 上下居中 */
+        padding: 10px 20px;
+        border: 1px solid #888;
+        width: 80%; /* 内容宽度 */
+        max-width: 500px; /* 最大宽度限制 */
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      /* 关闭按钮 */
+      .close {
+        color: #151414;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        float: right;
+      }
+      .close1,
+      .close2,
+      .close3,
+      .close4 {
+        color: #151414;
+        font-size: 28px;
+        font-weight: bold;
+        display: flex;
+        justify-content: end;
+      }
+      .tpclose {
+        color: #151414;
+        font-size: 28px;
+        font-weight: bold;
+        display: flex;
+        justify-content: end;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        width: 100%;
+        font-size: 30px;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .nv-tb {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .nt1 img {
+        width: 105px;
+        height: 105px;
+        border-radius: 50%;
+      }
+      #nt1Container {
+        margin-top: 180px;
+        position: relative;
+        font-size: 19px;
+        color: #fff;
+      }
+      .name {
+        position: absolute;
+        top: 37px;
+        left: 17px;
+      }
+      #nt2Container {
+        margin-top: 120px;
+        position: relative;
+        font-size: 19px;
+        color: #fff;
+      }
+      #nt3Container {
+        margin-top: 280px;
+        position: relative;
+        font-size: 19px;
+        color: #fff;
+      }
+      #nt4Container {
+        margin-top: 100px;
+        position: relative;
+        font-size: 19px;
+        color: #fff;
+      }
+      .phbang {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+      }
+      .nt-info {
+        display: flex;
+      }
+      .nt-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .nt-left img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+      .nt-con {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+      }
+      .nt-con span:nth-child(1) {
+        font-size: 30px;
+      }
+      .nt-right {
+        flex: 1;
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .dbz {
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+        font-size: 22px;
+      }
+      .dbz-list {
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+      }
+      .nt-right-db span {
+        color: red;
+      }
+      .nt-right-db span em {
+        font-size: 28px;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 投票选择框 -->
+    <div id="voteModal" class="modal">
+      <div class="modal-content">
+        <span class="tpclose">&times;</span>
+        <div class="title">请选择要投票的女团</div>
+        <div class="nv-tb" id="voteOptions">
+          <!-- 动态生成投票选项 -->
+        </div>
+      </div>
+    </div>
+    <div id="myModal" class="modal">
+      <!-- 弹窗内容 -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="title">排行榜</div>
+        <div class="ph-box"></div>
+      </div>
+    </div>
+    <!-- 女团1弹窗 -->
+    <div id="nt1" class="modal">
+      <!-- 弹窗内容 -->
+      <div class="modal-content1">
+        <div class="close1">&times;</div>
+        <div class="nt-info">
+          <div class="nt-left">
+            <img src="./images/aespa.png" alt="" />
+            <div class="nt-con">
+              <span>aespa</span>
+              <span>2000.1.1 出道</span>
+            </div>
+          </div>
+          <div class="nt-right">
+            <div class="nt-right-tb">
+              <span class="dbz">代表作</span>
+              <div class="dbz-list">
+                <div class="dbz-item">1</div>
+                <div class="dbz-item">1</div>
+                <div class="dbz-item">1</div>
+                <div class="dbz-item">1</div>
+              </div>
+            </div>
+            <div class="nt-right-db">
+              <span>热度值：<em>999</em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 女团3弹窗 -->
+    <div id="nt2" class="modal">
+      <!-- 弹窗内容 -->
+      <div class="modal-content1">
+        <div class="close2">&times;</div>
+        <div class="nt-info">
+          <div class="nt-left">
+            <img src="./images/blackpink.png" alt="" />
+            <div class="nt-con">
+              <span>blackpink</span>
+              <span>2000.1.1 出道</span>
+            </div>
+          </div>
+          <div class="nt-right">
+            <div class="nt-right-tb">
+              <span class="dbz">代表作</span>
+              <div class="dbz-list">
+                <div class="dbz-item">12</div>
+                <div class="dbz-item">12</div>
+                <div class="dbz-item">12</div>
+                <div class="dbz-item">12</div>
+              </div>
+            </div>
+            <div class="nt-right-db">
+              <span>热度值：<em>999</em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 女团2弹窗 -->
+    <div id="nt3" class="modal">
+      <!-- 弹窗内容 -->
+      <div class="modal-content1">
+        <div class="close3">&times;</div>
+        <div class="nt-info">
+          <div class="nt-left">
+            <img src="./images/nmixx.png" alt="" />
+            <div class="nt-con">
+              <span>nmixx</span>
+              <span>2000.1.1 出道</span>
+            </div>
+          </div>
+          <div class="nt-right">
+            <div class="nt-right-tb">
+              <span class="dbz">代表作</span>
+              <div class="dbz-list">
+                <div class="dbz-item">1</div>
+                <div class="dbz-item">1</div>
+                <div class="dbz-item">1</div>
+                <div class="dbz-item">1</div>
+              </div>
+            </div>
+            <div class="nt-right-db">
+              <span>热度值：<em>999</em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 女团4弹窗 -->
+    <div id="nt4" class="modal">
+      <!-- 弹窗内容 -->
+      <div class="modal-content1">
+        <div class="close4">&times;</div>
+        <div class="nt-info">
+          <div class="nt-left">
+            <img src="./images/newjeans.png" alt="" />
+            <div class="nt-con">
+              <span>new jeans</span>
+              <span>2000.1.1 出道</span>
+            </div>
+          </div>
+          <div class="nt-right">
+            <div class="nt-right-tb">
+              <span class="dbz">代表作</span>
+              <div class="dbz-list">
+                <div class="dbz-item">12</div>
+                <div class="dbz-item">12</div>
+                <div class="dbz-item">12</div>
+                <div class="dbz-item">12</div>
+              </div>
+            </div>
+            <div class="nt-right-db">
+              <span>热度值：<em>999</em></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="bg">
+        <div class="nt-box-left">
+          <div class="nv-tb">
+            <div class="nt1" id="nt1Container">
+              <img src="./images/aespa.png" alt="" />
+              <span class="name"> aespa </span>
+            </div>
+            <div class="nt1" id="nt2Container">
+              <img src="./images/blackpink.png" alt="" />
+              <span class="name"> blackpink</span>
+            </div>
+          </div>
+        </div>
+        <div class="nt-box-right">
+          <div class="nv-tb">
+            <div class="nt1" id="nt3Container">
+              <img src="./images/nmixx.png" alt="" />
+              <span class="name"> nmixx </span>
+            </div>
+            <div class="nt1" id="nt4Container">
+              <img src="./images/newjeans.png" alt="" />
+              <span class="name">newjeans</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hp" id="openModalBtn">排行</div>
+      <div class="ljtp">立即投票！</div>
+    </div>
+
+    <script>
+      function setFontSize() {
+        const element = document.querySelector(".html");
+        const viewportWidth = window.innerWidth;
+        const minFontSize = 14;
+        const maxFontSize = 18;
+        const designWidth = 370;
+
+        let fontSize =
+          (viewportWidth / designWidth) * (maxFontSize - minFontSize) +
+          minFontSize;
+
+        // 设置字体大小
+        element.style.fontSize = `${fontSize}px`;
+      }
+
+      // 初始化字体大小
+      setFontSize();
+
+      // 监听窗口大小变化
+      window.addEventListener("resize", setFontSize);
+      // 获取模态框
+      var modal = document.getElementById("myModal");
+
+      // 获取触发模态框的按钮
+      var btn = document.getElementById("openModalBtn");
+
+      // 获取关闭按钮
+      var span = document.getElementsByClassName("close")[0];
+
+      // 当点击按钮时，打开模态框
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // 当点击关闭按钮时，关闭模态框
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // 当用户点击模态框外部时，关闭模态框
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+      // 女团1弹窗
+      var modal1 = document.getElementById("nt1");
+      var btn1 = document.getElementById("nt1Container");
+      var span1 = document.getElementsByClassName("close1")[0];
+      btn1.onclick = function () {
+        modal1.style.display = "block";
+      };
+      span1.onclick = function () {
+        modal1.style.display = "none";
+      };
+      window.onclick = function (event) {
+        if (event.target == modal1) {
+          modal1.style.display = "none";
+        }
+      };
+      // 女团3弹窗
+      var modal2 = document.getElementById("nt2");
+      var btn2 = document.getElementById("nt2Container");
+      var span1 = document.getElementsByClassName("close2")[0];
+      btn2.onclick = function () {
+        modal2.style.display = "block";
+      };
+      span1.onclick = function () {
+        modal2.style.display = "none";
+      };
+      window.onclick = function (event) {
+        if (event.target == modal2) {
+          modal2.style.display = "none";
+        }
+      };
+      // 女团2弹窗
+      var modal3 = document.getElementById("nt3");
+      var btn3 = document.getElementById("nt3Container");
+      var span3 = document.getElementsByClassName("close3")[0];
+      btn3.onclick = function () {
+        modal3.style.display = "block";
+      };
+      span3.onclick = function () {
+        modal3.style.display = "none";
+      };
+      window.onclick = function (event) {
+        if (event.target == modal2) {
+          modal3.style.display = "none";
+        }
+      };
+      // 女团4弹窗
+      var modal4 = document.getElementById("nt4");
+      var btn4 = document.getElementById("nt4Container");
+      var span4 = document.getElementsByClassName("close4")[0];
+      btn4.onclick = function () {
+        modal4.style.display = "block";
+      };
+      span4.onclick = function () {
+        modal4.style.display = "none";
+      };
+      window.onclick = function (event) {
+        if (event.target == modal4) {
+          modal4.style.display = "none";
+        }
+      };
+    </script>
+    <script>
+      // 假设这是初始票数
+      let voteCounts = {
+        'aespa': 0, // 女团1
+        "nmixx": 0, // 女团2
+        "blackpink": 0, // 女团3
+        "newjeans": 0, // 女团4
+      };
+
+      function updateRanking() {
+        // 根据票数对女团进行排序
+        const sortedVotes = Object.entries(voteCounts).sort(
+          (a, b) => b[1] - a[1]
+        );
+
+        // 清空 ph-box 内容
+        document.querySelector(".ph-box").innerHTML = "";
+
+        // 动态生成新的排行榜内容
+        sortedVotes.forEach(([id, count], index) => {
+          console.log(id,1111);
+          
+          const rank = `TOOP ${index + 1}`;
+          const imgSrc = `./images/${id}.png`; // 假设图片文件名与ID对应
+          const div = document.createElement("div");
+          div.className = "ph1";
+          div.innerHTML = `
+          <div class="phbang">
+             <span >${rank} </span>
+              <span>(${count} 票)</span>
+            </div>
+              <img src="${imgSrc}" alt="" />
+            `;
+          document.querySelector(".ph-box").appendChild(div);
+        });
+      }
+
+      function setupVoteOptions() {
+        // 清空投票选项
+        document.getElementById("voteOptions").innerHTML = "";
+
+        // 动态生成投票选项
+        for (const [id, count] of Object.entries(voteCounts)) {
+          const button = document.createElement("button");
+          button.style.padding = "8px";
+          button.style.marginBottom = "5px";
+          button.style.borderRadius = "5px";
+          button.style.border = "1px solid #ccc";
+          button.textContent = `给${id}投票`;
+          button.onclick = () => vote(id);
+          document.getElementById("voteOptions").appendChild(button);
+        }
+      }
+
+      function vote(id) {
+        // 更新票数
+        voteCounts[id] += 1;
+        // 关闭投票框
+        document.getElementById("voteModal").style.display = "none";
+        alert(`投票成功！女团${id}的票数已更新。`);
+        // 更新排行榜
+        updateRanking();
+      }
+
+      // 获取投票选择框
+      var voteModal = document.getElementById("voteModal");
+
+      // 获取触发投票选择框的按钮
+      var ljtpBtn = document.querySelector(".ljtp");
+
+      // 获取关闭按钮
+      var span = document.getElementsByClassName("tpclose")[0];
+
+      // 当点击“立即投票！”时，打开投票选择框
+      ljtpBtn.onclick = function () {
+        voteModal.style.display = "block";
+        setupVoteOptions(); // 每次打开前设置投票选项
+      };
+
+      // 当点击关闭按钮时，关闭投票选择框
+      span.onclick = function () {
+        voteModal.style.display = "none";
+      };
+
+      // 当用户点击投票选择框外部时，关闭投票选择框
+      window.onclick = function (event) {
+        if (event.target == voteModal) {
+          voteModal.style.display = "none";
+        }
+      };
+
+      // 初始化排行榜
+      updateRanking();
+    </script>
+  </body>
+</html>
