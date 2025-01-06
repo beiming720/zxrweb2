@@ -134,6 +134,14 @@
         height: 100%; /* 高度占满整个屏幕 */
         overflow: auto; /* 如果内容超出屏幕，则允许滚动 */
         background-color: rgba(0, 0, 0, 0.4); /* 半透明黑色背景 */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal.show {
+        opacity: 1;
+        visibility: visible;
       }
 
       /* 弹窗内容 */
@@ -145,6 +153,13 @@
         width: 80%; /* 内容宽度 */
         max-width: 500px; /* 最大宽度限制 */
         border-radius: 10px;
+        transform: scale(0.7);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      .modal.show .modal-content {
+        transform: scale(1);
+        opacity: 1;
       }
       .modal-content1 {
         background-color: rgba(255, 255, 255, 0.6); /* 白色透明背景 */
@@ -156,6 +171,13 @@
         border-radius: 10px;
         display: flex;
         flex-direction: column;
+        transform: scale(0.7);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      .modal.show .modal-content1 {
+        transform: scale(1);
+        opacity: 1;
       }
       /* 关闭按钮 */
       .close {
@@ -247,7 +269,7 @@
         display: flex;
       }
       .nt-left {
-        flex: 1;
+        flex: 2;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -268,7 +290,7 @@
         font-size: 30px;
       }
       .nt-right {
-        flex: 1;
+        flex: 3;
         margin-left: 10px;
         display: flex;
         flex-direction: column;
@@ -289,6 +311,16 @@
       .nt-right-db span em {
         font-size: 28px;
         color: black;
+      }
+      .dbz-item {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+      }
+      audio {
+        width: 180px;
+        height: 25px;
       }
     </style>
   </head>
@@ -328,10 +360,34 @@
             <div class="nt-right-tb">
               <span class="dbz">代表作</span>
               <div class="dbz-list">
-                <div class="dbz-item">1</div>
-                <div class="dbz-item">1</div>
-                <div class="dbz-item">1</div>
-                <div class="dbz-item">1</div>
+                <div class="dbz-item">
+                  <span>Supernova-aespa</span>
+                  <audio controls>
+                    <source src="video/Supernova-aespa.MP3" type="audio/MP3" />
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Drama-aespa</span>
+                  <audio controls>
+                    <source src="video/Drama-aespa.MP3" type="audio/MP3" />
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Next level-aespa</span>
+                  <audio controls>
+                    <source src="video/Next level-aespa.MP3" type="audio/MP3" />
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Whiplash-aespa</span>
+                  <audio controls>
+                    <source src="video/Whiplash-aespa.MP3" type="audio/MP3" />
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
               </div>
             </div>
             <div class="nt-right-db">
@@ -358,10 +414,50 @@
             <div class="nt-right-tb">
               <span class="dbz">代表作</span>
               <div class="dbz-list">
-                <div class="dbz-item">12</div>
-                <div class="dbz-item">12</div>
-                <div class="dbz-item">12</div>
-                <div class="dbz-item">12</div>
+                <div class="dbz-item">
+                  <span>As if it's Your Last-Blackpink</span>
+                  <audio controls>
+                    <source
+                      src="video/As if it's Your Last-Blackpink.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Kill this love-Blackpink</span>
+                  <audio controls>
+                    <source
+                      src="video/Kill this love-Blackpink.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Lovesick girl-Blackpink</span>
+                  <audio controls>
+                    <source
+                      src="video/Lovesick girl-Blackpink.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Whisper-Blackpink</span>
+                  <audio controls>
+                    <source
+                      src="video/Whisper-Blackpink.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
               </div>
             </div>
             <div class="nt-right-db">
@@ -388,10 +484,44 @@
             <div class="nt-right-tb">
               <span class="dbz">代表作</span>
               <div class="dbz-list">
-                <div class="dbz-item">1</div>
-                <div class="dbz-item">1</div>
-                <div class="dbz-item">1</div>
-                <div class="dbz-item">1</div>
+                <div class="dbz-item">
+                  <span>Dash-Nmixx</span>
+                  <audio controls>
+                    <source src="video/Dash-Nmixx.MP3" type="audio/MP3" />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Love me like this-Nmixx</span>
+                  <audio controls>
+                    <source
+                      src="video/Love me like this-Nmixx.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>O.O-Nmixx</span>
+                  <audio controls>
+                    <source src="video/O.O-Nmixx.MP3" type="audio/MP3" />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Young dumb stupid-Nmixx</span>
+                  <audio controls>
+                    <source
+                      src="video/Young dumb stupid-Nmixx.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
               </div>
             </div>
             <div class="nt-right-db">
@@ -418,10 +548,50 @@
             <div class="nt-right-tb">
               <span class="dbz">代表作</span>
               <div class="dbz-list">
-                <div class="dbz-item">12</div>
-                <div class="dbz-item">12</div>
-                <div class="dbz-item">12</div>
-                <div class="dbz-item">12</div>
+                <div class="dbz-item">
+                  <span>Attention-Newjeans</span>
+                  <audio controls>
+                    <source
+                      src="video/Attention-Newjeans.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Ditto-Newjeans</span>
+                  <audio controls>
+                    <source
+                      src="video/Ditto-Newjeans.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>ETA-Newjeans</span>
+                  <audio controls>
+                    <source
+                      src="video/ETA-Newjeans.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
+                <div class="dbz-item">
+                  <span>Supershy-Newjeans</span>
+                  <audio controls>
+                    <source
+                      src="video/Supershy-Newjeans.MP3"
+                      type="audio/MP3"
+                    />
+
+                    您的浏览器不支持 audio 标签。
+                  </audio>
+                </div>
               </div>
             </div>
             <div class="nt-right-db">
@@ -461,10 +631,10 @@
       <div class="hp" id="openModalBtn">排行</div>
       <div class="ljtp">立即投票！</div>
     </div>
-
+    <script src="js/jquery.min.js"></script>
     <script>
       function setFontSize() {
-        const element = document.querySelector(".html");
+        const element = $(".html");
         const viewportWidth = window.innerWidth;
         const minFontSize = 14;
         const maxFontSize = 18;
@@ -473,192 +643,170 @@
         let fontSize =
           (viewportWidth / designWidth) * (maxFontSize - minFontSize) +
           minFontSize;
-
-        // 设置字体大小
-        element.style.fontSize = `${fontSize}px`;
+        element.css("fontSize", `${fontSize}px`);
       }
 
-      // 初始化字体大小
       setFontSize();
 
-      // 监听窗口大小变化
-      window.addEventListener("resize", setFontSize);
-      // 获取模态框
-      var modal = document.getElementById("myModal");
+      $(window).on("resize", setFontSize);
 
-      // 获取触发模态框的按钮
-      var btn = document.getElementById("openModalBtn");
-
-      // 获取关闭按钮
-      var span = document.getElementsByClassName("close")[0];
+      // 获取模态框相关元素
+      var modal = $("#myModal");
+      var btn = $("#openModalBtn");
+      var span = $(".close").eq(0);
 
       // 当点击按钮时，打开模态框
-      btn.onclick = function () {
-        modal.style.display = "block";
-      };
+      btn.on("click", function () {
+        modal.fadeIn(10).addClass("show");
+      });
 
       // 当点击关闭按钮时，关闭模态框
-      span.onclick = function () {
-        modal.style.display = "none";
-      };
+      span.on("click", function () {
+        modal.removeClass("show").fadeOut(300);
+      });
 
       // 当用户点击模态框外部时，关闭模态框
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
+      $(window).on("click", function (event) {
+        if ($(event.target).hasClass("modal")) {
+          $(event.target).removeClass("show").fadeOut(300);
         }
-      };
+      });
+
       // 女团1弹窗
-      var modal1 = document.getElementById("nt1");
-      var btn1 = document.getElementById("nt1Container");
-      var span1 = document.getElementsByClassName("close1")[0];
-      btn1.onclick = function () {
-        modal1.style.display = "block";
-      };
-      span1.onclick = function () {
-        modal1.style.display = "none";
-      };
-      window.onclick = function (event) {
-        if (event.target == modal1) {
-          modal1.style.display = "none";
-        }
-      };
-      // 女团3弹窗
-      var modal2 = document.getElementById("nt2");
-      var btn2 = document.getElementById("nt2Container");
-      var span1 = document.getElementsByClassName("close2")[0];
-      btn2.onclick = function () {
-        modal2.style.display = "block";
-      };
-      span1.onclick = function () {
-        modal2.style.display = "none";
-      };
-      window.onclick = function (event) {
-        if (event.target == modal2) {
-          modal2.style.display = "none";
-        }
-      };
+      var modal1 = $("#nt1");
+      var btn1 = $("#nt1Container");
+      var span1 = $(".close1").eq(0);
+
+      btn1.on("click", function () {
+        modal1.fadeIn(10).addClass("show");
+      });
+
+      span1.on("click", function () {
+        modal1.removeClass("show").fadeOut(300);
+      });
+
       // 女团2弹窗
-      var modal3 = document.getElementById("nt3");
-      var btn3 = document.getElementById("nt3Container");
-      var span3 = document.getElementsByClassName("close3")[0];
-      btn3.onclick = function () {
-        modal3.style.display = "block";
-      };
-      span3.onclick = function () {
-        modal3.style.display = "none";
-      };
-      window.onclick = function (event) {
-        if (event.target == modal2) {
-          modal3.style.display = "none";
-        }
-      };
+      var modal2 = $("#nt2");
+      var btn2 = $("#nt2Container");
+      var span2 = $(".close2").eq(0);
+
+      btn2.on("click", function () {
+        modal2.fadeIn(10).addClass("show");
+      });
+
+      span2.on("click", function () {
+        modal2.removeClass("show").fadeOut(300);
+      });
+
+      // 女团3弹窗
+      var modal3 = $("#nt3");
+      var btn3 = $("#nt3Container");
+      var span3 = $(".close3").eq(0);
+
+      btn3.on("click", function () {
+        modal3.fadeIn(10).addClass("show");
+      });
+
+      span3.on("click", function () {
+        modal3.removeClass("show").fadeOut(300);
+      });
+
       // 女团4弹窗
-      var modal4 = document.getElementById("nt4");
-      var btn4 = document.getElementById("nt4Container");
-      var span4 = document.getElementsByClassName("close4")[0];
-      btn4.onclick = function () {
-        modal4.style.display = "block";
-      };
-      span4.onclick = function () {
-        modal4.style.display = "none";
-      };
-      window.onclick = function (event) {
-        if (event.target == modal4) {
-          modal4.style.display = "none";
-        }
-      };
-    </script>
-    <script>
+      var modal4 = $("#nt4");
+      var btn4 = $("#nt4Container");
+      var span4 = $(".close4").eq(0);
+
+      btn4.on("click", function () {
+        modal4.fadeIn(10).addClass("show");
+      });
+
+      span4.on("click", function () {
+        modal4.removeClass("show").fadeOut(300);
+      });
+
       // 假设这是初始票数
       let voteCounts = {
-        'aespa': 0, // 女团1
-        "nmixx": 0, // 女团2
-        "blackpink": 0, // 女团3
-        "newjeans": 0, // 女团4
+        aespa: 0, // 女团1
+        nmixx: 0, // 女团2
+        blackpink: 0, // 女团3
+        newjeans: 0, // 女团4
       };
 
       function updateRanking() {
-        // 根据票数对女团进行排序
         const sortedVotes = Object.entries(voteCounts).sort(
           (a, b) => b[1] - a[1]
         );
 
-        // 清空 ph-box 内容
-        document.querySelector(".ph-box").innerHTML = "";
+        // 清空并更新排行榜
+        const phBox = $(".ph-box");
+        phBox.empty();
 
-        // 动态生成新的排行榜内容
         sortedVotes.forEach(([id, count], index) => {
-          console.log(id,1111);
-          
           const rank = `TOOP ${index + 1}`;
-          const imgSrc = `./images/${id}.png`; // 假设图片文件名与ID对应
-          const div = document.createElement("div");
-          div.className = "ph1";
-          div.innerHTML = `
-          <div class="phbang">
-             <span >${rank} </span>
-              <span>(${count} 票)</span>
-            </div>
+          const imgSrc = `./images/${id}.png`;
+
+          // 使用 jQuery 创建元素
+          $("<div>")
+            .addClass("ph1")
+            .html(
+              `
+              <div class="phbang">
+                <span>${rank}</span>
+                <span>(${count} 票)</span>
+              </div>
               <img src="${imgSrc}" alt="" />
-            `;
-          document.querySelector(".ph-box").appendChild(div);
+            `
+            )
+            .appendTo(phBox);
         });
       }
 
       function setupVoteOptions() {
-        // 清空投票选项
-        document.getElementById("voteOptions").innerHTML = "";
+        const voteOptions = $("#voteOptions");
+        voteOptions.empty();
 
         // 动态生成投票选项
-        for (const [id, count] of Object.entries(voteCounts)) {
-          const button = document.createElement("button");
-          button.style.padding = "8px";
-          button.style.marginBottom = "5px";
-          button.style.borderRadius = "5px";
-          button.style.border = "1px solid #ccc";
-          button.textContent = `给${id}投票`;
-          button.onclick = () => vote(id);
-          document.getElementById("voteOptions").appendChild(button);
-        }
+        Object.entries(voteCounts).forEach(([id, count]) => {
+          $("<button>")
+            .css({
+              padding: "8px",
+              marginBottom: "5px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+            })
+            .text(`给${id}投票`)
+            .on("click", () => vote(id))
+            .appendTo(voteOptions);
+        });
       }
 
       function vote(id) {
-        // 更新票数
         voteCounts[id] += 1;
-        // 关闭投票框
-        document.getElementById("voteModal").style.display = "none";
+        $("#voteModal").fadeOut(300);
         alert(`投票成功！女团${id}的票数已更新。`);
-        // 更新排行榜
         updateRanking();
       }
 
-      // 获取投票选择框
-      var voteModal = document.getElementById("voteModal");
+      // 获取投票选择框相关元素
+      var voteModal = $("#voteModal");
+      var ljtpBtn = $(".ljtp");
 
-      // 获取触发投票选择框的按钮
-      var ljtpBtn = document.querySelector(".ljtp");
+      // 当点击"立即投票！"时，打开投票选择框
+      ljtpBtn.on("click", function () {
+        voteModal.fadeIn(10).addClass("show");
+        setupVoteOptions();
+      });
 
-      // 获取关闭按钮
-      var span = document.getElementsByClassName("tpclose")[0];
-
-      // 当点击“立即投票！”时，打开投票选择框
-      ljtpBtn.onclick = function () {
-        voteModal.style.display = "block";
-        setupVoteOptions(); // 每次打开前设置投票选项
-      };
-
-      // 当点击关闭按钮时，关闭投票选择框
-      span.onclick = function () {
-        voteModal.style.display = "none";
-      };
+      $(".tpclose").on("click", function () {
+        voteModal.removeClass("show").fadeOut(300);
+      });
 
       // 当用户点击投票选择框外部时，关闭投票选择框
-      window.onclick = function (event) {
-        if (event.target == voteModal) {
-          voteModal.style.display = "none";
+      $(window).on("click", function (event) {
+        if ($(event.target).is(voteModal)) {
+          voteModal.fadeOut(300);
         }
-      };
+      });
 
       // 初始化排行榜
       updateRanking();
